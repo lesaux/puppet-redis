@@ -2,17 +2,19 @@ class redis::healthcheck ( ) {
 
   include xinetd
 
-  ensure_packages(['redis-cli'])  
+  ensure_packages(['redis-tools'])
+
+}
 
   define redis::healthcheck::xinetd ( $redisip, $redisport, $healthcheckport )  {
 
-    file { "/usr/sbin/redis-role.sh-$name":
+    file { "/usr/sbin/redis-role-$name.sh":
       ensure => file,
       content => template('redis/redis-role.sh.erb'),
       owner  => root,
       group  => root,
       mode   => '0755',
-    }  
+    }
 
     xinetd::service { "redis-$name":
       flags           => REUSE,
@@ -27,6 +29,4 @@ class redis::healthcheck ( ) {
       per_source      => UNLIMITED,
     }
 
-  } 
-
-}
+  }

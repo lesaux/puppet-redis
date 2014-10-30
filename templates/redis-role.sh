@@ -1,6 +1,6 @@
 #!/bin/bash
 
-redis-cli -h <%= @redisaddress %> -p <%= redisport %> info | grep role | grep master > /dev/null
+redis-cli -h <%= @redisip %> -p <%= @redisport %> info | grep role | grep master > /dev/null
 if [ $? = 0 ]; then
   echo -en "HTTP/1.1 200 OK\r\n"
   echo -en "Content-Type: text/plain\r\n"
