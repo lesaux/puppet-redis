@@ -1,5 +1,7 @@
 class redis::healthcheck ( ) {
 
+  include xinetd
+
   ensure_packages(['redis-cli'])  
 
   define redis::healthcheck::xinetd ( $redisip, $redisport, $healthcheckport )  {
