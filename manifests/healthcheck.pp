@@ -29,4 +29,14 @@ class redis::healthcheck ( ) {
       per_source      => UNLIMITED,
     }
 
+   augeas { "xinet-service-redis-$name":
+      context => '/files/etc/services',
+      changes => [
+        "set service-name[port = '$healthcheckport']/port $healthcheckport",
+        "set service-name[port = '$healthcheckport'] redis-$name",
+        "set service-name[port = '$healthcheckport']/protocol tcp",
+        "set service-name[port = '$healthcheckport']/#comment redis-$name-healthcheck",
+      ],
+    }
+
   }
