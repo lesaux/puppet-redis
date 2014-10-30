@@ -15,16 +15,16 @@ class redis::healthcheck ( ) {
     }  
 
     xinetd::service { "redis-$name":
-      flags           = REUSE
-      socket_type     = stream
-      port            = $healthcheckport
-      wait            = no
-      user            = nobody
-      server          = "/usr/sbin/redis-role-$name.sh"
-      log_on_failure  += USERID
-      disable         = no
-      only_from       = 0.0.0.0/0
-      per_source      = UNLIMITED
+      flags           => REUSE,
+      socket_type     => stream,
+      port            => $healthcheckport,
+      wait            => no,
+      user            => nobody,
+      server          => "/usr/sbin/redis-role-$name.sh",
+      log_on_failure  => USERID,
+      disable         => no,
+      only_from       => '0.0.0.0/0',
+      per_source      => UNLIMITED,
     }
 
   } 
