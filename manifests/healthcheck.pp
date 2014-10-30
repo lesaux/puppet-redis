@@ -1,9 +1,8 @@
-class redis::healthchecks ( ) {
+class redis::healthcheck ( ) {
 
   ensure_packages(['redis-cli'])  
 
-
-  define redis::healthcheck ( $redisip, $redisport, $healthcheckport )  {
+  define redis::healthcheck::xinetd ( $redisip, $redisport, $healthcheckport )  {
 
     file { "/usr/sbin/redis-role.sh-$name":
       ensure => file,
