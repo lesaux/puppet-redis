@@ -2,19 +2,31 @@
 
 redis-cli -h <%= @redisip %> -p <%= @redisport %> info | grep role | grep master > /dev/null
 if [ $? = 0 ]; then
-  echo -en "HTTP/1.1 200 OK\r\n"|cat
+  echo -en "HTTP/1.1 200 OK\r\n"
+  sleep 0.1
   echo -en "Content-Type: text/plain\r\n"
+  sleep 0.1
   echo -en "Connection: close\r\n"
+  sleep 0.1
   echo -en "Content-Length: 12\r\n"
+  sleep 0.1
   echo -en "\r\n"
+  sleep 0.1
   echo -en "redis:master\r\n"
+  sleep 0.1
   exit 0
 else
   echo -en "HTTP/1.1 503 Service Unavailable\r\n"|cat
+  sleep 0.1
   echo -en "Content-Type: text/plain\r\n"
+  sleep 0.1
   echo -en "Connection: close\r\n"
+  sleep 0.1
   echo -en "Content-Length: 11\r\n"
+  sleep 0.1
   echo -en "\r\n"
+  sleep 0.1
   echo -en "redis:slave\r\n"
+  sleep 0.1
   exit 0
 fi
