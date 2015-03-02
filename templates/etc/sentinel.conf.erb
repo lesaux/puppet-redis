@@ -8,6 +8,8 @@ logfile <%= @sentinel_log_dir -%>/redis-sentinel_<%= @sentinel_name %>.log
 
 port <%= @sentinel_port -%>
 
+pidfile /var/run/redis_<%= @sentinel_name %>.pid
+
 <%
   #rules = scope.lookupvar('redis::sentinel::monitors')
   monitors.sort.each do |name, rule| %>
